@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../screens/booking confirmation.dart';
+import '../screens/profilesettings.dart';
+import '../screens/roomListScreen.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -11,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     Center(child: Text('Home Page', style: TextStyle(fontSize: 24))),
     Center(child: Text('Search Page', style: TextStyle(fontSize: 24))),
-    Center(child: Text('Profile Page', style: TextStyle(fontSize: 24))),
+    Center(child: ProfileSettingsScreen()),
   ];
 
   void _onItemTapped(int index) {
@@ -58,8 +62,12 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              title: Text('room list '),
               onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RoomListScreen()),
+                );
                 // Handle settings tap
               },
             ),
@@ -67,7 +75,26 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.info),
               title: Text('About'),
               onTap: () {
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BookingConfirmationScreen(bookingDates: "10/10/10",ownerContact: "98756",paymentMethod:"till" ,roomName: "succed",)),
+                );
                 // Handle about tap
+
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('settings'),
+              onTap: () {
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileSettingsScreen()),
+                );
+                // Handle about tap
+
               },
             ),
           ],
@@ -75,6 +102,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+
         currentIndex: _currentIndex,
         onTap: _onItemTapped,
         items: [
@@ -87,8 +115,11 @@ class _HomePageState extends State<HomePage> {
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+
+            icon: Icon(Icons.person,),
+
             label: 'Profile',
+
           ),
         ],
       ),
